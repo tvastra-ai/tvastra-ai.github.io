@@ -5,11 +5,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tvastra — Blogs & Research</title>
   <style>
-    :root{--bg:#080808;--text:#f3f1ec;--accent:#ff6a00}
-    body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:40px}
+    :root{--bg:#080808;--text:#f3f1ec;--accent:#ff6a00;--line:rgba(255,255,255,.10);--line-bright:rgba(255,255,255,.18);}
+    body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:0}
     a{color:var(--accent)}
-    .page{max-width:980px;margin:0 auto}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+    .page{width:min(var(--max,980px),calc(100% - 64px));margin:0 auto;padding:40px 0}
+
+    /* Nav styles copied from main site so navbar appears on blogs pages */
+    nav{
+      height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 12px
+    }
+
+    .logo{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600}
+    .logo img{display:block;height:42px;width:auto}
+    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+    .nav-links{display:flex;gap:34px;color:var(--text);font-size:13px}
+    .nav-links a{color:var(--text);opacity:.9}
+
+    .nav-cta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
+    .nav-cta span{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(255,106,0,.35)}
+
+    header{display:flex;justify-content:space-between;align-items:center;margin:28px 0}
     .post-list{display:grid;gap:20px}
     .post{padding:18px;border:1px solid rgba(255,255,255,.06)}
     .post h3{margin:0 0 8px}
@@ -18,9 +34,25 @@
 </head>
 <body>
   <div class="page">
+    <nav>
+      <a href="/" class="logo">
+        <img id="nav-logo" src="../images/tvastra_ai_logo.jpeg" alt="Tvastra logo" />
+        <span class="sr-only">TVASTRA</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#problem">Why</a>
+        <a href="/index.html#architecture">Architecture</a>
+        <a href="/index.html#team">Team</a>
+        <a href="index.html">Blogs</a>
+      </div>
+
+      <a href="mailto:varulsrivastava06@gmail.com" class="nav-cta"><span></span>Get in touch</a>
+    </nav>
+
     <header>
       <h1>Blogs & Research</h1>
-      <nav><a href="/">Home</a></nav>
     </header>
 
     <section class="post-list">
