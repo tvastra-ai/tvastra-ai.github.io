@@ -18,8 +18,8 @@
       --muted-2: #5f5e5a;
       --line: rgba(255,255,255,.10);
       --line-bright: rgba(255,255,255,.18);
-      --accent: #d9ff62;
-      --accent-dark: #a8cb3e;
+      --accent: #ff6a00; /* updated to logo orange */
+      --accent-dark: #cc5600;
       --max: 1240px;
     }
 
@@ -127,6 +127,19 @@
       border-radius: 50%;
       background: var(--accent);
       box-shadow: 0 0 14px rgba(217,255,98,.7);
+    }
+
+    .logo img {
+      display: block;
+      height: 28px;
+      width: auto;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      height: 1px; width: 1px;
+      overflow: hidden; clip: rect(1px,1px,1px,1px);
+      white-space: nowrap; border: 0; padding: 0; margin: -1px;
     }
 
     /* ─────────────────────────────────────────
@@ -253,6 +266,41 @@
     .hero-link:hover {
       gap: 22px;
       color: var(--accent);
+    }
+
+    /* Hero media (right-side): plays animation then reveals logo */
+    .hero-media {
+      position: absolute;
+      right: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 520px;
+      max-width: 44vw;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-media video,
+    .hero-media img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid var(--line-bright);
+      box-shadow: 0 30px 90px rgba(0,0,0,.6);
+      background: #000;
+    }
+
+    .hero-media img {
+      object-fit: contain;
+      background: transparent;
+    }
+
+    @media (max-width: 800px) {
+      .hero-media { display: none; }
+      .logo img { height: 36px; }
     }
 
     /* ─────────────────────────────────────────
@@ -931,14 +979,15 @@
     <!-- NAVIGATION -->
     <nav>
       <a href="#" class="logo">
-        <span class="logo-mark"></span>
-        TVASTRA
+        <img id="nav-logo" src="images/tvastra_ai_logo.jpeg" alt="Tvastra logo" style="height:42px; width:auto; display:block;" />
+        <span class="sr-only">TVASTRA</span>
       </a>
 
       <div class="nav-links">
         <a href="#problem">Why</a>
         <a href="#architecture">Architecture</a>
         <a href="#team">Team</a>
+        <a href="blogs/index.html">Blogs</a>
       </div>
 
     <!-- NAV -->
@@ -976,6 +1025,11 @@
             <span>→</span>
           </a>
         </div>
+      </div>
+      
+      <div class="hero-media">
+        <video id="hero-video" src="images/tvastra_ai_anim.mp4" autoplay muted playsinline></video>
+        <img id="hero-logo" data-png="images/tvastra_ai_logo.png" data-jpeg="images/tvastra_ai_logo.jpeg" src="images/tvastra_ai_logo.jpeg" alt="Tvastra AI logo" style="display:none" />
       </div>
     </header>
 
@@ -1281,6 +1335,64 @@
     }
 
 
+    // Play the intro animation (10s) then reveal the static AI logo.
+    (function () {
+      const video = document.getElementById('hero-video');
+      const logo = document.getElementById('hero-logo');
+
+      if (!video || !logo) return;
+
+      // Ensure the video plays once; prefer 'ended' event but also fallback to 10s timeout.
+      const revealLogo = () => {
+        try {
+          video.pause();
+        } catch (e) {}
+        video.style.display = 'none';
+        logo.style.display = 'block';
+      };
+
+      // If the video fires ended, reveal immediately.
+      video.addEventListener('ended', revealLogo, { once: true });
+
+      // Fallback: reveal after 10 seconds from load/start.
+      const fallbackTimeout = setTimeout(revealLogo, 10000);
+
+      // If user disables autoplay or video is already paused, still attempt to reveal after timeout.
+      video.addEventListener('play', () => {
+        clearTimeout(fallbackTimeout);
+        // ensure we still reveal after roughly 10s from play
+        setTimeout(revealLogo, 10000);
+      }, { once: true });
+    })();
+
+    // Prefer the PNG logo if present; fall back to jpeg. Applies to nav and hero logos.
+    (function () {
+      function tryPreferPng(el) {
+        if (!el) return;
+        const png = el.dataset && el.dataset.png;
+        const jpeg = el.dataset && el.dataset.jpeg;
+        if (!png) return; // nothing to do
+
+        const test = new Image();
+        test.onload = () => { el.src = png; };
+        test.onerror = () => { if (jpeg) el.src = jpeg; };
+        test.src = png;
+      }
+
+      const heroLogo = document.getElementById('hero-logo');
+      const navLogo = document.getElementById('nav-logo');
+
+      // attach dataset to nav if not present
+      if (navLogo && !navLogo.dataset.png) {
+        navLogo.dataset.png = 'images/tvastra_ai_logo.png';
+        navLogo.dataset.jpeg = 'images/tvastra_ai_logo.jpeg';
+      }
+
+      tryPreferPng(heroLogo);
+      tryPreferPng(navLogo);
+    })();
+
+
     // Prevent animated elements from moving for users
     // who have requested reduced motion.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1291,6 +1403,14 @@
         el.style.animationIterationCount = "1";
         el.style.transitionDuration = "0.001ms";
       });
+      // Replace animated hero video with static logo for reduced motion users
+      const rv = document.getElementById('hero-video');
+      const rl = document.getElementById('hero-logo');
+      if (rv && rl) {
+        try { rv.pause(); } catch (e) {}
+        rv.style.display = 'none';
+        rl.style.display = 'block';
+      }
     }
   </script>
 
