@@ -1,193 +1,1209 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tvastra | AI Training Beyond Human Capabilities</title>
-    <style>
-        /* Base Styles & Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            line-height: 1.6;
-        }
-        h1, h2, h3 {
-            color: #ffffff;
-            font-weight: 600;
-        }
-        a {
-            color: #58a6ff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 100px 0;
-            text-align: center;
-            border-bottom: 1px solid #30363d;
-        }
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            background: -webkit-linear-gradient(#fff, #8b949e);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero p {
-            font-size: 1.25rem;
-            color: #8b949e;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #238636;
-            color: #ffffff;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        .btn:hover {
-            background-color: #2ea043;
-            text-decoration: none;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Tvastra builds autonomous environments for training AI beyond human capabilities." />
+  <title>Tvastra — Training AI Beyond Human Capabilities</title>
 
-        /* Content Sections */
-        .section {
-            padding: 80px 0;
-            border-bottom: 1px solid #30363d;
-        }
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-        .card h3 {
-            margin-bottom: 12px;
-            color: #58a6ff;
-        }
-        ul {
-            list-style-position: inside;
-            margin-top: 16px;
-        }
-        li {
-            margin-bottom: 12px;
-        }
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-        }
-        @media (max-width: 600px) {
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+    :root {
+      --bg: #080808;
+      --surface: #101010;
+      --surface-2: #151515;
+      --text: #f3f1ec;
+      --muted: #8b8a86;
+      --muted-2: #5f5e5a;
+      --line: rgba(255,255,255,.10);
+      --line-bright: rgba(255,255,255,.18);
+      --accent: #d9ff62;
+      --accent-dark: #a8cb3e;
+      --max: 1240px;
+    }
 
-        /* Footer */
-        .footer {
-            padding: 40px 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #8b949e;
-        }
-        .footer-links {
-            margin-top: 16px;
-        }
-        .footer-links a {
-            margin: 0 10px;
-        }
-    </style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #000;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(var(--max), calc(100% - 64px));
+      margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────
+       NAV
+    ───────────────────────────────────────── */
+
+    nav {
+      height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -.02em;
+    }
+
+    .logo-mark {
+      width: 24px;
+      height: 24px;
+      position: relative;
+      transform: rotate(45deg);
+    }
+
+    .logo-mark::before,
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1.5px solid var(--accent);
+    }
+
+    .logo-mark::after {
+      inset: 9px;
+      background: var(--accent);
+      border: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .nav-cta span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px rgba(217,255,98,.7);
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+
+    .hero {
+      min-height: 760px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      opacity: .28;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(to bottom, black, transparent 80%);
+    }
+
+    .hero-orbit {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      right: -180px;
+      top: 60px;
+      border: 1px solid rgba(217,255,98,.11);
+      border-radius: 50%;
+      animation: rotate 40s linear infinite;
+    }
+
+    .hero-orbit::before,
+    .hero-orbit::after {
+      content: "";
+      position: absolute;
+      inset: 70px;
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 50%;
+    }
+
+    .hero-orbit::after {
+      inset: 180px;
+      border-color: rgba(217,255,98,.08);
+    }
+
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 950px;
+      padding: 100px 0;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 36px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(58px, 8vw, 112px);
+      line-height: .91;
+      letter-spacing: -.065em;
+      font-weight: 500;
+      max-width: 1000px;
+    }
+
+    .hero h1 em {
+      font-family: "Instrument Serif", serif;
+      font-weight: 400;
+      color: var(--accent);
+      letter-spacing: -.04em;
+    }
+
+    .hero-bottom {
+      margin-top: 55px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      max-width: 920px;
+    }
+
+    .hero-description {
+      max-width: 470px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: "DM Mono", monospace;
+      font-size: 12px;
+      color: var(--text);
+      border-bottom: 1px solid var(--line-bright);
+      padding-bottom: 10px;
+      transition: gap .25s ease, color .25s ease;
+    }
+
+    .hero-link:hover {
+      gap: 22px;
+      color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       MARQUEE
+    ───────────────────────────────────────── */
+
+    .marquee {
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 25s linear infinite;
+      padding: 18px 0;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding-right: 32px;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    .marquee-item i {
+      width: 4px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─────────────────────────────────────────
+       INTRO
+    ───────────────────────────────────────── */
+
+    section {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro {
+      padding: 150px 0;
+    }
+
+    .section-label {
+      font-family: "DM Mono", monospace;
+      color: var(--accent);
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 45px;
+    }
+
+    .intro h2 {
+      max-width: 950px;
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      font-weight: 500;
+    }
+
+    .intro h2 span {
+      color: var(--muted-2);
+    }
+
+    /* ─────────────────────────────────────────
+       PROBLEM
+    ───────────────────────────────────────── */
+
+    .problem {
+      padding: 130px 0;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1.7fr;
+      gap: 100px;
+    }
+
+    .side-title {
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+    }
+
+    .problem-content h2 {
+      font-size: clamp(34px, 4vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -.045em;
+      font-weight: 500;
+      margin-bottom: 50px;
+    }
+
+    .problem-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .problem-item {
+      display: grid;
+      grid-template-columns: 55px 1fr;
+      gap: 25px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .problem-number {
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: var(--accent);
+    }
+
+    .problem-item h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .problem-item p {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 550px;
+      line-height: 1.65;
+    }
+
+    /* ─────────────────────────────────────────
+       ARCHITECTURE
+    ───────────────────────────────────────── */
+
+    .architecture {
+      padding: 140px 0;
+    }
+
+    .architecture-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 70px;
+    }
+
+    .architecture-header h2 {
+      font-size: clamp(40px, 5vw, 70px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 500;
+      max-width: 650px;
+    }
+
+    .architecture-header p {
+      max-width: 300px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .architecture-diagram {
+      position: relative;
+      min-height: 500px;
+      border: 1px solid var(--line);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(217,255,98,.055), transparent 38%),
+        var(--surface);
+      overflow: hidden;
+    }
+
+    .diagram-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size: 45px 45px;
+    }
+
+    .diagram-node {
+      position: absolute;
+      z-index: 2;
+      width: 210px;
+      padding: 24px;
+      background: rgba(16,16,16,.92);
+      border: 1px solid var(--line-bright);
+      backdrop-filter: blur(12px);
+    }
+
+    .diagram-node.simulator {
+      left: 10%;
+      top: 34%;
+    }
+
+    .diagram-node.verifier {
+      right: 10%;
+      top: 34%;
+    }
+
+    .diagram-node.core {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 250px;
+      border-color: rgba(217,255,98,.45);
+      box-shadow: 0 0 70px rgba(217,255,98,.06);
+    }
+
+    .node-tag {
+      font-family: "DM Mono", monospace;
+      color: var(--accent);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      margin-bottom: 22px;
+    }
+
+    .diagram-node h3 {
+      font-size: 21px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .diagram-node p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .connection {
+      position: absolute;
+      z-index: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(217,255,98,.45), transparent);
+      transform-origin: left center;
+    }
+
+    .connection.one {
+      width: 290px;
+      left: 26%;
+      top: 50%;
+      transform: rotate(0deg);
+    }
+
+    .connection.two {
+      width: 290px;
+      left: 54%;
+      top: 50%;
+      transform: rotate(0deg);
+    }
+
+    .flow-dot {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 14px var(--accent);
+      animation: flow 3s linear infinite;
+    }
+
+    .flow-dot.one {
+      left: 28%;
+      top: calc(50% - 2px);
+    }
+
+    .flow-dot.two {
+      left: 56%;
+      top: calc(50% - 2px);
+      animation-delay: 1.5s;
+    }
+
+    @keyframes flow {
+      0% { transform: translateX(0); opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateX(230px); opacity: 0; }
+    }
+
+    /* ─────────────────────────────────────────
+       PHILOSOPHY
+    ───────────────────────────────────────── */
+
+    .philosophy {
+      padding: 150px 0;
+    }
+
+    .philosophy-quote {
+      max-width: 1050px;
+      font-size: clamp(38px, 5.5vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -.055em;
+    }
+
+    .philosophy-quote .dim {
+      color: var(--muted-2);
+    }
+
+    .philosophy-meta {
+      margin-top: 55px;
+      display: flex;
+      justify-content: flex-end;
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    /* ─────────────────────────────────────────
+       TEAM
+    ───────────────────────────────────────── */
+
+    .team {
+      padding: 130px 0;
+    }
+
+    .team-header {
+      margin-bottom: 65px;
+    }
+
+    .team-header h2 {
+      font-size: clamp(42px, 5vw, 70px);
+      letter-spacing: -.05em;
+      font-weight: 500;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .person {
+      padding: 35px 30px 35px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .person + .person {
+      padding-left: 30px;
+      border-left: 1px solid var(--line);
+    }
+
+    .person-number {
+      font-family: "DM Mono", monospace;
+      color: var(--accent);
+      font-size: 10px;
+      margin-bottom: 80px;
+    }
+
+    .person h3 {
+      font-size: 27px;
+      font-weight: 500;
+      letter-spacing: -.03em;
+      margin-bottom: 10px;
+    }
+
+    .person-role {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 25px;
+    }
+
+    .person p {
+      color: var(--muted);
+      max-width: 420px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* ─────────────────────────────────────────
+       CTA
+    ───────────────────────────────────────── */
+
+    .cta {
+      padding: 170px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      border: 1px solid rgba(217,255,98,.08);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .cta-inner {
+      position: relative;
+      text-align: center;
+      z-index: 2;
+    }
+
+    .cta h2 {
+      font-size: clamp(48px, 7vw, 94px);
+      line-height: .95;
+      letter-spacing: -.06em;
+      font-weight: 500;
+      max-width: 850px;
+      margin: 0 auto 45px;
+    }
+
+    .cta h2 em {
+      font-family: "Instrument Serif", serif;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      background: var(--accent);
+      color: #080808;
+      padding: 16px 23px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(217,255,98,.12);
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+
+    footer {
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--muted-2);
+      font-family: "DM Mono", monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 25px;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* ─────────────────────────────────────────
+       REVEAL
+    ───────────────────────────────────────── */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity .8s cubic-bezier(.16,1,.3,1),
+        transform .8s cubic-bezier(.16,1,.3,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─────────────────────────────────────────
+       MOBILE
+    ───────────────────────────────────────── */
+
+    @media (max-width: 800px) {
+      .page {
+        width: min(100% - 36px, var(--max));
+      }
+
+      nav {
+        height: 72px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 700px;
+      }
+
+      .hero-orbit {
+        width: 500px;
+        height: 500px;
+        right: -300px;
+        top: 150px;
+      }
+
+      .hero-bottom {
+        display: block;
+      }
+
+      .hero-link {
+        margin-top: 30px;
+      }
+
+      .intro,
+      .problem,
+      .architecture,
+      .philosophy,
+      .team {
+        padding: 90px 0;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .architecture-header {
+        display: block;
+      }
+
+      .architecture-header p {
+        margin-top: 25px;
+      }
+
+      .architecture-diagram {
+        min-height: 600px;
+      }
+
+      .diagram-node.simulator {
+        left: 5%;
+        top: 15%;
+      }
+
+      .diagram-node.verifier {
+        right: 5%;
+        top: 68%;
+      }
+
+      .diagram-node.core {
+        top: 50%;
+      }
+
+      .connection.one {
+        width: 160px;
+        left: 30%;
+        top: 35%;
+        transform: rotate(32deg);
+      }
+
+      .connection.two {
+        width: 160px;
+        left: 51%;
+        top: 61%;
+        transform: rotate(32deg);
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .person + .person {
+        padding-left: 0;
+        border-left: none;
+      }
+
+      .person-number {
+        margin-bottom: 50px;
+      }
+
+      .footer-inner {
+        display: block;
+      }
+
+      .footer-links {
+        margin-top: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
+  <div class="page">
+
+    <!-- NAVIGATION -->
+    <nav>
+      <a href="#" class="logo">
+        <span class="logo-mark"></span>
+        TVASTRA
+      </a>
+
+      <div class="nav-links">
+        <a href="#problem">Why</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#team">Team</a>
+      </div>
+
+      <a href="#contact" class="nav-cta">
+        <span></span>
+        Get in touch
+      </a>
+    </nav>
+
+    <!-- HERO -->
     <header class="hero">
-        <div class="container">
-            <h1>Tvastra: Training AI models beyond human capabilities [cite: 60]</h1>
-            <p>Building autonomous environments for AI training beyond human capabilities. [cite: 64]</p>
-            <a href="#pitch" class="btn">Discover Our Architecture / Read the Pitch [cite: 46]</a>
+      <div class="hero-grid"></div>
+      <div class="hero-orbit"></div>
+
+      <div class="hero-content reveal">
+        <div class="eyebrow">
+          Autonomous AI Research
         </div>
+
+        <h1>
+          Training AI<br>
+          <em>beyond</em> human<br>
+          capabilities.
+        </h1>
+
+        <div class="hero-bottom">
+          <p class="hero-description">
+            Tvastra builds autonomous environments that generate,
+            execute, and verify high-quality training experiences
+            for frontier AI systems.
+          </p>
+
+          <a href="#architecture" class="hero-link">
+            Explore the architecture
+            <span>→</span>
+          </a>
+        </div>
+      </div>
     </header>
 
-    <section class="section" id="motivation">
-        <div class="container">
-            <h2 class="section-title">The Bottleneck: Humans Are the Limit [cite: 47, 63]</h2>
-            <p>The evolution of AI training is hitting a fundamental wall. [cite: 48] The current paradigms are no longer sustainable:</p>
-            <ul>
-                <li><strong>Public Data Exhaustion:</strong> Relying on the digitized world and internet data results in a high noise-to-signal ratio. [cite: 63]</li>
-                <li><strong>The Cost of Expertise:</strong> As AI continues to surpass human baselines, sourcing expert human workflows is becoming increasingly expensive and difficult to scale. [cite: 50, 63]</li>
-            </ul>
-        </div>
+  </div>
+
+  <!-- SIGNAL BAR -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="marquee-item"><i></i> Autonomous environments</div>
+      <div class="marquee-item"><i></i> Synthetic research</div>
+      <div class="marquee-item"><i></i> Agentic training</div>
+      <div class="marquee-item"><i></i> Scientific verification</div>
+      <div class="marquee-item"><i></i> Frontier intelligence</div>
+
+      <div class="marquee-item"><i></i> Autonomous environments</div>
+      <div class="marquee-item"><i></i> Synthetic research</div>
+      <div class="marquee-item"><i></i> Agentic training</div>
+      <div class="marquee-item"><i></i> Scientific verification</div>
+      <div class="marquee-item"><i></i> Frontier intelligence</div>
+    </div>
+  </div>
+
+  <div class="page">
+
+    <!-- INTRO -->
+    <section class="intro reveal">
+      <div class="section-label">01 / The bottleneck</div>
+
+      <h2>
+        The next generation of AI cannot be trained
+        <span>by scaling the same human processes that
+        created the last generation.</span>
+      </h2>
     </section>
 
-    <section class="section" id="pitch">
-        <div class="container">
-            <h2 class="section-title">The Next Paradigm: Autonomous Environments [cite: 51, 62]</h2>
-            <div class="card">
-                <p>We are moving past the era of human labelers and expensive Human+AI workflows. [cite: 62] We are pioneering the shift toward Autonomous Environments to pave the way for Artificial Superintelligence (ASI). [cite: 62] Our workflow breaks free from human limitations through a robust, self-improving architecture:</p>
-                <ul>
-                    <li><strong>The Simulator:</strong> We synthesize unstructured scientific data, causal structures, and distinct personas to create a simulated "PhD Researcher." [cite: 53, 65]</li>
-                    <li><strong>The Verifier:</strong> Workflows are rigorously checked by a Verification Agent equipped with specialized tools and scientific grounding to ensure high-quality downstream training. [cite: 54, 66]</li>
-                </ul>
-            </div>
+    <!-- PROBLEM -->
+    <section class="problem" id="problem">
+      <div class="two-column">
+
+        <div class="side-title reveal">
+          The constraint
         </div>
+
+        <div class="problem-content">
+
+          <h2 class="reveal">
+            Intelligence is scaling faster than the data used to train it.
+          </h2>
+
+          <div class="problem-list">
+
+            <div class="problem-item reveal">
+              <div class="problem-number">01</div>
+              <div>
+                <h3>The internet is finite.</h3>
+                <p>
+                  Publicly available data is increasingly exhausted,
+                  noisy, and poorly aligned with the capabilities
+                  frontier of modern models.
+                </p>
+              </div>
+            </div>
+
+            <div class="problem-item reveal">
+              <div class="problem-number">02</div>
+              <div>
+                <h3>Expertise does not scale.</h3>
+                <p>
+                  As models surpass human baselines, producing useful
+                  demonstrations requires increasingly scarce and
+                  expensive expert workflows.
+                </p>
+              </div>
+            </div>
+
+            <div class="problem-item reveal">
+              <div class="problem-number">03</div>
+              <div>
+                <h3>Human feedback has a ceiling.</h3>
+                <p>
+                  A system cannot reliably learn capabilities that
+                  humans themselves cannot evaluate, discover, or
+                  execute at scale.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
     </section>
 
-    <section class="section" id="team">
-        <div class="container">
-            <h2 class="section-title">Meet the Founders [cite: 54, 61]</h2>
-            <div class="team-grid">
-                <div class="card">
-                    <h3>Sankarshan Damle [cite: 61]</h3>
-                    <p><strong>Background:</strong> Post-training at IBM Research, Microsoft Research, and EPFL, Lausanne. [cite: 61]</p>
-                    <p><strong>Accolades:</strong> Publications in top AI venues including ICLR, ICML, NeurIPS, ACL, AAAI, and IJCAI. [cite: 61]</p>
-                </div>
-                <div class="card">
-                    <h3>Varul Srivastava [cite: 61]</h3>
-                    <p><strong>Background:</strong> Agents at Deepmind, Oracle, and Microsoft Research. [cite: 61]</p>
-                    <p><strong>Accolades:</strong> Gold Medalist from IIIT Hyderabad and competitor at ACM ICPC Regionals. [cite: 61]</p>
-                </div>
-            </div>
+    <!-- ARCHITECTURE -->
+    <section class="architecture" id="architecture">
+
+      <div class="architecture-header reveal">
+        <div>
+          <div class="section-label">02 / The architecture</div>
+          <h2>
+            Replace the labeler with an environment.
+          </h2>
         </div>
+
+        <p>
+          We construct closed-loop environments in which
+          AI systems can generate research, act on it,
+          and independently determine whether it worked.
+        </p>
+      </div>
+
+      <div class="architecture-diagram reveal">
+
+        <div class="diagram-grid"></div>
+
+        <div class="diagram-node simulator">
+          <div class="node-tag">01 / Simulator</div>
+          <h3>Generate</h3>
+          <p>
+            Scientific worlds, causal structures,
+            problems, personas, and research trajectories.
+          </p>
+        </div>
+
+        <div class="diagram-node core">
+          <div class="node-tag">02 / Agent</div>
+          <h3>Research</h3>
+          <p>
+            An autonomous researcher explores the environment,
+            forms hypotheses, uses tools, and executes workflows.
+          </p>
+        </div>
+
+        <div class="diagram-node verifier">
+          <div class="node-tag">03 / Verifier</div>
+          <h3>Verify</h3>
+          <p>
+            Independent verification agents test outcomes
+            against tools, evidence, and scientific constraints.
+          </p>
+        </div>
+
+        <div class="connection one"></div>
+        <div class="connection two"></div>
+
+        <div class="flow-dot one"></div>
+        <div class="flow-dot two"></div>
+
+      </div>
+
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>Tvastra © 2026 | Training AI models beyond human capabilities. [cite: 60]</p>
-            <div class="footer-links">
-                <a href="#">Twitter / X</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Research Papers</a>
-                <a href="#">Contact</a>
-            </div>
+    <!-- PHILOSOPHY -->
+    <section class="philosophy reveal">
+
+      <div class="section-label">03 / The thesis</div>
+
+      <div class="philosophy-quote">
+        We don't want to make humans
+        <span class="dim">better at producing training data.</span>
+        <br><br>
+        We want to build systems that
+        <span class="dim">produce it themselves.</span>
+      </div>
+
+      <div class="philosophy-meta">
+        Tvastra / 2026
+      </div>
+
+    </section>
+
+    <!-- TEAM -->
+    <section class="team" id="team">
+
+      <div class="team-header reveal">
+        <div class="section-label">04 / The people</div>
+        <h2>Built by researchers.</h2>
+      </div>
+
+      <div class="team-grid">
+
+        <article class="person reveal">
+          <div class="person-number">01</div>
+
+          <h3>Sankarshan Damle</h3>
+
+          <div class="person-role">
+            Co-founder · Post-training & AI systems
+          </div>
+
+          <p>
+            Research across post-training and foundation models
+            at IBM Research, Microsoft Research, and EPFL Lausanne.
+            Published across ICLR, ICML, NeurIPS, ACL, AAAI, and IJCAI.
+          </p>
+        </article>
+
+        <article class="person reveal">
+          <div class="person-number">02</div>
+
+          <h3>Varul Srivastava</h3>
+
+          <div class="person-role">
+            Co-founder · Agents & autonomous systems
+          </div>
+
+          <p>
+            Research and engineering across agents at DeepMind,
+            Oracle, and Microsoft Research. Gold Medalist from
+            IIIT Hyderabad and ACM ICPC Regional competitor.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="contact">
+
+      <div class="cta-inner reveal">
+
+        <div class="section-label">
+          05 / The future
         </div>
+
+        <h2>
+          The training loop is about to become
+          <em>autonomous.</em>
+        </h2>
+
+        <a href="mailto:hello@tvastra.ai" class="cta-button">
+          Talk to us
+          <span>↗</span>
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-inner">
+        <span>© 2026 Tvastra</span>
+
+        <div class="footer-links">
+          <a href="#">X</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Research</a>
+          <a href="mailto:hello@tvastra.ai">Contact</a>
+        </div>
+      </div>
     </footer>
+
+  </div>
+
+  <script>
+    // Reveal sections as they enter the viewport.
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    document.querySelectorAll(".reveal").forEach(el => {
+      observer.observe(el);
+    });
+
+
+    // Subtle cursor-responsive movement for the hero orbit.
+    const hero = document.querySelector(".hero");
+    const orbit = document.querySelector(".hero-orbit");
+
+    if (hero && orbit && window.matchMedia("(pointer:fine)").matches) {
+      hero.addEventListener("mousemove", e => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 18;
+        const y = (e.clientY / window.innerHeight - 0.5) * 18;
+
+        orbit.style.marginLeft = `${x}px`;
+        orbit.style.marginTop = `${y}px`;
+      });
+    }
+
+
+    // Prevent animated elements from moving for users
+    // who have requested reduced motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.style.scrollBehavior = "auto";
+
+      document.querySelectorAll("*").forEach(el => {
+        el.style.animationDuration = "0.001ms";
+        el.style.animationIterationCount = "1";
+        el.style.transitionDuration = "0.001ms";
+      });
+    }
+  </script>
 
 </body>
 </html>
+```
