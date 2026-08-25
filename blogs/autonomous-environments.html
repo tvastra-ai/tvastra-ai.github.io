@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>From Data to Autonomous Environments - Tvashtr</title>
+  <meta name="description" content="Why the next generation of AI training requires autonomous environments that generate, execute, verify, and improve their own tasks." />
+  <style>
+    :root{--bg:#080808;--text:#f3f1ec;--muted:#a5a5a5;--accent:#ff6a00;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box} body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:40px 24px}
+    a{color:var(--accent)} .page{max-width:900px;margin:0 auto} header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:30px} h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.04em;font-weight:500;max-width:720px;margin:0} nav{white-space:nowrap;font-size:14px}.meta{color:var(--muted);margin-bottom:38px} article{font-size:18px;line-height:1.7} article h2{font-size:30px;line-height:1.1;font-weight:500;margin:54px 0 18px} article p{max-width:760px} figure{margin:38px 0 44px} figure img{display:block;width:100%;height:auto;border:1px solid var(--line)} figcaption{color:var(--muted);font-size:14px;line-height:1.5;margin-top:10px} .kicker{color:var(--accent);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}@media(max-width:680px){body{padding:24px 18px}header{display:block}nav{margin-top:18px}article{font-size:17px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div><div class="kicker">Tvashtr / Research perspective</div><h1>From data to autonomous environments</h1></div>
+      <nav><a href="/">Home</a> · <a href="/blogs/">Blogs</a></nav>
+    </header>
+    <div class="meta">Published: 2026 · Tvashtr</div>
+    <article>
+      <figure><img src="../images/blog_1_cover.png" alt="A person standing inside a luminous autonomous digital environment" /><figcaption>The next training substrate is not a larger static dataset. It is an environment that can produce and test experience.</figcaption></figure>
+
+      <p>AI training has moved through several eras: first, the web gave us scale; then human feedback gave models a stronger sense of usefulness; and now expert work is becoming the bottleneck. As frontier models move beyond the tasks people can reliably perform or evaluate, more of the training loop must become autonomous.</p>
+
+      <h2>The supervision gap</h2>
+      <p>Capability is advancing faster than the quality of available supervision. Web data is abundant but noisy. General human feedback is scalable but coarse. Expert evaluation is valuable but expensive and finite. Eventually, the model trajectory rises above the signals that created it, leaving a supervision gap where plausible errors, reward hacking, and unseen failure modes can survive.</p>
+      <figure><img src="../images/blog_1_Evolution_of_data.png" alt="Four eras of AI data and supervision, ending with autonomous verification" /><figcaption>From web scraping and crowd feedback to expert sourcing and autonomous verification: each transition is a response to the limits of the previous signal.</figcaption></figure>
+
+      <h2>A training environment that closes the loop</h2>
+      <p>Tvashtr is building toward a different kind of infrastructure: agentic environments that generate challenging tasks, let models act with tools, verify outcomes against programmatic or formal criteria, and use those results to evolve the next curriculum. The goal is not to imitate human effort at greater volume. It is to create reliable training signals for capabilities that are difficult to specify, demonstrate, or judge by hand.</p>
+      <figure><img src="../images/blog_1_evolution_harness.png" alt="A four-part autonomous training loop with task generation, sandbox runtime, verification, and environment evolution" /><figcaption>An autonomous loop: generate edge cases, execute them in a sandbox, verify the result, then evolve the environment as capability improves.</figcaption></figure>
+
+      <h2>Why verification is foundational</h2>
+      <p>Generation without verification creates fluent artifacts, not dependable learning. A useful environment needs an oracle: tests, simulators, formal checks, or other grounded signals that distinguish a correct solution from a convincing one. That verification layer turns activity into evidence and lets the system improve without asking a human expert to inspect every step.</p>
+
+      <h2>Beyond the data wall</h2>
+      <p>The long-term opportunity is a compounding system in which better models discover harder tasks, harder tasks expose new weaknesses, and reliable verification converts those discoveries into training signal. This is how training infrastructure can scale with intelligence itself. Autonomous environments are not a replacement for people; they are the machinery that lets human intent reach further than manual supervision alone.</p>
+      <figure><img src="../images/blog_1_scaling.png" alt="A chart showing frontier model capability rising above human supervision ceilings" /><figcaption>As capability rises, static data and human evaluation leave an expanding gap. Autonomous environments are designed to keep the signal moving with the frontier.</figcaption></figure>
+    </article>
+  </div>
+</body>
+</html>

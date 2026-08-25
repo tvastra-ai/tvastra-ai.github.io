@@ -121,6 +121,60 @@
     /* hide original small dot inside CTA */
     .nav-cta span { display: none; }
 
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line-bright);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .nav-toggle span,
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+      content: "";
+      transition: transform .2s ease;
+    }
+
+    .nav-toggle span {
+      position: relative;
+    }
+
+    .nav-toggle span::before,
+    .nav-toggle span::after {
+      position: absolute;
+      left: 0;
+    }
+
+    .nav-toggle span::before {
+      top: -6px;
+    }
+
+    .nav-toggle span::after {
+      top: 6px;
+    }
+
+    .nav-toggle[aria-expanded="true"] span {
+      background: transparent;
+    }
+
+    .nav-toggle[aria-expanded="true"] span::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span::after {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
     /* ─────────────────────────────────────────
        ARCHITECTURE (replaced by Evolution)
     ───────────────────────────────────────── */

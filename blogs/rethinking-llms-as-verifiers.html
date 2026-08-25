@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>When Verification Is Harder Than Solving - Tvashtr</title>
+  <meta name="description" content="What an ICLR 2026 workshop paper reveals about the failure modes of LLM-based verification and the case for grounded evaluation environments." />
+  <style>
+    :root{--bg:#080808;--text:#f3f1ec;--muted:#a5a5a5;--accent:#ff6a00;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box} body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:40px 24px}
+    a{color:var(--accent)} .page{max-width:900px;margin:0 auto} header{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;margin-bottom:30px} h1{font-size:clamp(38px,6vw,68px);line-height:1;letter-spacing:-.04em;font-weight:500;max-width:760px;margin:0} nav{white-space:nowrap;font-size:14px}.meta{color:var(--muted);margin-bottom:38px} article{font-size:18px;line-height:1.7} article h2{font-size:30px;line-height:1.1;font-weight:500;margin:54px 0 18px} article p{max-width:760px} figure{margin:38px 0 44px} figure img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--line)} figcaption{color:var(--muted);font-size:14px;line-height:1.5;margin-top:10px}.kicker{color:var(--accent);font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}.callout{border-left:2px solid var(--accent);padding:4px 0 4px 22px;color:#ddd;margin:30px 0;max-width:760px}@media(max-width:680px){body{padding:24px 18px}header{display:block}nav{margin-top:18px}article{font-size:17px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div><div class="kicker">Tvashtr / Paper notes</div><h1>When verification is harder than solving</h1></div>
+      <nav><a href="/">Home</a> · <a href="/blogs/">Blogs</a></nav>
+    </header>
+    <div class="meta">Published: 2026 · Varul Srivastava, Sankarshan Damle, and Manisha Padala · <a href="../resources/ICLR_workshop_paper.pdf">Read the paper</a></div>
+    <article>
+      <p>Large language models are increasingly asked to judge the outputs of other models, or even their own. The appeal is obvious: if a model can solve a problem, surely checking a proposed solution should be easier. The ICLR 2026 workshop paper <em>Rethinking LLMs as Verifiers: When Verification Is Harder Than Solving</em> tests that intuition directly, and finds that it often fails.</p>
+      <p>Across multiple-choice reasoning, program synthesis, and multi-step problem solving, the authors show that verification can be less accurate than solving the same task. That matters wherever model judgments become training signal: RLAIF, self-improvement loops, hallucination detection, and automated benchmarking all depend on the evaluator noticing when a plausible answer is wrong.</p>
+
+      <h2>The surprising gap between solving and checking</h2>
+      <p>Figure 1 compares zero-shot solver accuracy with zero-shot verifier accuracy across MMLU-Pro subjects. Points below the diagonal are cases where the verifier underperforms the solver. The pattern appears across model families and subjects, which suggests that this is not a narrow benchmark artifact. Verification is a distinct capability, not an automatic by-product of generation.</p>
+      <figure><img src="../images/Figure1.png" alt="Scatter plot comparing zero-shot solver and verifier accuracy across MMLU-Pro subjects" /><figcaption>Figure 1. Verification does not reliably match solving performance. Many subjects fall below the parity line.</figcaption></figure>
+
+      <h2>Three ways a judge can fail</h2>
+      <p>The paper studies verification along three axes. First is <strong>epistemic bias</strong>: models are better at accepting correct solutions than rejecting incorrect ones. A polished, plausible answer can receive approval even when the underlying reasoning is unsound.</p>
+      <p>Second is <strong>perturbation insensitivity</strong>. When a correct solution is changed with a small, localized error, judges often fail to notice. In the paper's program-synthesis experiments, rejection accuracy is low for near-correct candidates and rises only as edits make the error more globally visible.</p>
+      <figure><img src="../images/Figure2.png" alt="Line chart showing verifier rejection accuracy rising as more edits are applied to correct solutions" /><figcaption>Figure 2. Small perturbations are hard to detect; larger changes make incorrect programs easier for judges to reject.</figcaption></figure>
+      <p>This is a dangerous failure mode for autonomous loops. If the evaluator rewards a nearly correct but subtly broken artifact, the system can reinforce the exact behavior it was meant to eliminate. Surface similarity becomes a misleading stand-in for semantic correctness.</p>
+
+      <h2>Structure makes evaluation more reliable</h2>
+      <p>The third axis is <strong>rubric conditioning</strong>: what happens when the evaluator receives explicit, problem-specific criteria instead of an open-ended instruction to decide whether an answer is correct. Verification accuracy improves as more rubric criteria are supplied across most of the tested models.</p>
+      <figure><img src="../images/Figure3.png" alt="Line chart showing verification accuracy improving as the number of rubric criteria increases" /><figcaption>Figure 3. Explicit criteria give the verifier grounded checks and improve accuracy across model families.</figcaption></figure>
+      <p>Rubrics help in two ways. They decompose a holistic judgment into concrete checks, and they supply information the model may not reliably retrieve or reconstruct on its own. The gains are especially pronounced for smaller models, though stronger models benefit from structure too.</p>
+      <figure><img src="../images/Figure4.png" alt="Example showing a verifier changing from a false positive to a true negative after receiving two rubrics" /><figcaption>Figure 4. A concrete second rubric forces the verifier to test a recurrence and catches an error that vague criteria miss.</figcaption></figure>
+
+      <h2>What this means for autonomous training</h2>
+      <p>The practical lesson is not that LLM judges are useless. It is that their verdicts should not be treated as an implicit proxy for truth. Reliable evaluation needs grounded protocols: executable tests, formal checks, simulators, carefully designed rubrics, and benchmarks that deliberately stress localized correctness.</p>
+      <div class="callout">A training environment should generate difficult work and provide the evidence needed to tell whether the work is right.</div>
+      <p>This is closely aligned with Tvashtr's broader direction. We are interested in autonomous research environments where agents generate edge-case tasks, act inside sandboxes, and receive signals from verification mechanisms that are explicit and inspectable. The environment should not merely produce more model outputs; it should produce trustworthy evidence about those outputs and use that evidence to shape the next task.</p>
+      <p>As models become capable of producing solutions that exceed routine human review, verification becomes part of the frontier. The path to scalable, self-improving training is therefore not a larger judge prompt. It is infrastructure that makes correctness observable.</p>
+    </article>
+  </div>
+</body>
+</html>
