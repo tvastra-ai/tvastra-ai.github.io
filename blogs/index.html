@@ -8,22 +8,42 @@
     :root{--bg:#080808;--text:#f3f1ec;--accent:#ff6a00;--line:rgba(255,255,255,.10);--line-bright:rgba(255,255,255,.18);}
     body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:0}
     a{color:var(--accent)}
-    .page{width:min(var(--max,980px),calc(100% - 64px));margin:0 auto;padding:40px 0}
+    .page{width:min(1240px,calc(100% - 64px));margin:0 auto}
 
     /* Nav styles copied from main site so navbar appears on blogs pages */
     nav{
-      height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:0 12px
+      height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)
     }
 
     .logo{display:flex;align-items:center;gap:11px;font-size:15px;font-weight:600}
     .logo img{display:block;height:42px;width:auto}
     .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
 
-    .nav-links{display:flex;gap:34px;color:var(--text);font-size:13px}
-    .nav-links a{color:var(--text);opacity:.9}
+    .nav-links{display:flex;gap:34px;color:var(--muted);font-size:13px;white-space:nowrap;margin:0 auto}
+    .nav-links a{color:var(--muted);font-weight:600;transition:color .2s ease}
+    .nav-links a:hover{color:var(--text)}
 
-    .nav-cta{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text)}
-    .nav-cta span{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px rgba(255,106,0,.35)}
+    .nav-cta{display:flex;align-items:center;gap:8px;padding-left:18px;border-left:1px solid var(--line);font-size:13px;color:var(--text);white-space:nowrap}
+    .nav-cta span{display:none}
+    .nav-toggle{display:none;width:42px;height:42px;padding:0;align-items:center;justify-content:center;border:1px solid var(--line-bright);background:transparent;color:var(--text);cursor:pointer}
+    .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{display:block;width:18px;height:1px;background:currentColor;content:"";transition:transform .2s ease}
+    .nav-toggle span{position:relative}
+    .nav-toggle span::before,.nav-toggle span::after{position:absolute;left:0}
+    .nav-toggle span::before{top:-6px}
+    .nav-toggle span::after{top:6px}
+    .nav-toggle[aria-expanded="true"] span{background:transparent}
+    .nav-toggle[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+    .nav-toggle[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+    @media(max-width:800px){
+      .page{width:min(100% - 24px,1240px)}
+      nav{height:68px;position:relative}
+      .nav-toggle{display:inline-flex}
+      .nav-links{display:none;position:absolute;top:68px;left:12px;right:12px;flex-direction:column;gap:18px;padding:18px 16px;border:1px solid var(--line);background:rgba(8,8,8,.96);z-index:30}
+      .nav-links.open{display:flex}
+      .logo img{height:32px;border:none}
+      .nav-cta{display:none}
+    }
 
     header{display:flex;justify-content:space-between;align-items:center;margin:28px 0}
     .post-list{display:grid;gap:20px}
@@ -36,18 +56,19 @@
   <div class="page">
     <nav>
       <a href="/" class="logo">
-        <img id="nav-logo" src="../images/Tvashtr_logo.png" alt="Tvashtr logo" />
+        <img id="nav-logo" src="../images/tvashtr_bg_removed.png" alt="Tvashtr logo" />
         <span class="sr-only">TVASHTR</span>
       </a>
 
       <div class="nav-links">
-        <a href="/index.html">Home</a>
-        <a href="/index.html#problem">Why</a>
-        <a href="/index.html#evolution">Evolution</a>
-        <a href="/index.html#team">Team</a>
+        <a href="../index.html">Home</a>
+        <a href="../index.html#problem">Why</a>
+        <a href="../index.html#evolution">Evolution</a>
+        <a href="../index.html#team">Team</a>
         <a href="index.html">Blogs</a>
       </div>
 
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
       <a href="mailto:hello@tvashtrai.com" class="nav-cta"><span></span>Get in touch</a>
     </nav>
 
@@ -70,5 +91,15 @@
 
     </section>
   </div>
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+    }
+  </script>
 </body>
 </html>

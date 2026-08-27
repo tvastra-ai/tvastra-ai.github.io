@@ -6,21 +6,24 @@
   <title><!-- TITLE --> — Tvashtr</title>
   <meta name="description" content="<!-- SHORT DESCRIPTION -->" />
   <style>
-    :root{--bg:#080808;--text:#f3f1ec;--accent:#ff6a00}
-    body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:40px}
-    a{color:var(--accent)}
-    .page{max-width:900px;margin:0 auto}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+    :root{--bg:#080808;--text:#f3f1ec;--muted:#8b8a86;--line:rgba(255,255,255,.10);--line-bright:rgba(255,255,255,.18);--accent:#ff6a00}
+    *{box-sizing:border-box} body{background:var(--bg);color:var(--text);font-family:DM Sans,system-ui,Arial,sans-serif;margin:0;padding:0}
+    a{color:var(--accent)} .page{width:min(1240px,calc(100% - 64px));margin:0 auto}.site-nav{height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative}.logo{display:flex;align-items:center}.logo img{display:block;height:42px;width:auto}.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}.nav-links{display:flex;gap:34px;color:var(--muted);font-size:13px;white-space:nowrap;margin:0 auto}.nav-links a{color:var(--muted);font-weight:600;text-decoration:none}.nav-cta{display:flex;align-items:center;padding-left:18px;border-left:1px solid var(--line);font-size:13px;color:var(--text);white-space:nowrap;text-decoration:none}.nav-toggle{display:none;width:42px;height:42px;padding:0;align-items:center;justify-content:center;border:1px solid var(--line-bright);background:transparent;color:var(--text)}.nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{display:block;width:18px;height:1px;background:currentColor;content:""}.nav-toggle span{position:relative}.nav-toggle span::before,.nav-toggle span::after{position:absolute;left:0;content:""}.nav-toggle span::before{top:-6px}.nav-toggle span::after{top:6px} header{display:flex;justify-content:space-between;align-items:center;margin:40px 0 32px}
     .meta{color:#9b9b9b;margin-bottom:28px}
     article{line-height:1.7;font-size:18px}
-    pre,code{background:#0b0b0b;padding:8px;border-radius:6px;color:#fff}
+    pre,code{background:#0b0b0b;padding:8px;border-radius:6px;color:#fff}@media(max-width:800px){.page{width:min(100% - 24px,1240px)}.site-nav{height:68px}.nav-toggle{display:inline-flex}.nav-links{display:none;position:absolute;top:68px;left:12px;right:12px;flex-direction:column;gap:18px;padding:18px 16px;border:1px solid var(--line);background:rgba(8,8,8,.96);z-index:30}.nav-links.open{display:flex}.logo img{height:32px}.nav-cta{display:none}header{display:block;margin-top:24px}}
   </style>
 </head>
 <body>
   <div class="page">
+    <nav class="site-nav">
+      <a href="../index.html" class="logo"><img src="../images/tvashtr_bg_removed.png" alt="Tvashtr logo" /><span class="sr-only">TVASHTR</span></a>
+      <div class="nav-links"><a href="../index.html">Home</a><a href="../index.html#problem">Why</a><a href="../index.html#evolution">Evolution</a><a href="../index.html#team">Team</a><a href="index.html">Blogs</a></div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span></button>
+      <a href="mailto:hello@tvashtrai.com" class="nav-cta">Get in touch</a>
+    </nav>
     <header>
       <h1><!-- TITLE --></h1>
-      <nav><a href="/">Home</a> · <a href="/blogs/">Blogs</a></nav>
     </header>
 
     <div class="meta">Published: <!-- DATE --> · Author: <!-- AUTHOR --></div>
@@ -29,6 +32,7 @@
       <!-- MAIN CONTENT -->
     </article>
 
+  <script>const navToggle=document.querySelector('.nav-toggle');const navLinks=document.querySelector('.nav-links');if(navToggle&&navLinks){navToggle.addEventListener('click',()=>{const isOpen=navLinks.classList.toggle('open');navToggle.setAttribute('aria-expanded',String(isOpen));});}</script>
   </div>
 </body>
 </html>
